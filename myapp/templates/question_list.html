@@ -1,0 +1,10 @@
+{% for q in questions %}
+    <li>
+        <a href="{% url 'question_detail' q.id %}">
+            <strong>{{ q.title }}</strong>
+        </a><br>
+        {{ q.body|truncatewords:20 }}<br>
+        <small>Posted on: {{ q.created_at }}</small>
+    </li>
+    <hr>
+{% endfor %}
