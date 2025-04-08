@@ -9,4 +9,5 @@ urlpatterns = [
 	path('tasks/', views.task_list, name='task_list'),
 	path('tasks/<int:id>/', views.task_detail, name='task_detail'),
 	path('tasks/add/', views.add_task, name='add_task'),
+	path('questions/<int:question_id>/edit/', views.edit_question, name='edit_question'),
 ]

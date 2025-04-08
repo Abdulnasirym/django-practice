@@ -6,6 +6,7 @@
         {{ q.body|truncatewords:20 }}<br>
         <small>Posted on: {{ q.created_at }}</small>
     </li>
+    <a href="{% url 'edit_question' q.id %}">Edit</a>
     <hr>
 {% endfor %}
 <a href="{% url 'add_question' %}">Add a New Question</a>

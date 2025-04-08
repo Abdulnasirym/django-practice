@@ -45,3 +45,16 @@ def add_task(request):
 		form = TaskForm()
 
 	return render(request, 'add_task.html', {'form': form})
+
+def edit_question(request, question_id):
+	question = get_object_or_404(Question, pk=question_id)
+
+	if request.method == 'POST':
+		form = QuestionForm(request.POST, instance=question)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect(reverse('question_list'))
+	else:
+		form = QuestionForm(instance=question)
+
+	return render(request, 'edit_question.html', {'form': form})
