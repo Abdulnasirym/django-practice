@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Question, Task
-from .forms import QuestionForm, TaskForm
+from .forms import QuestionForm, TaskForm, SignUpForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -63,3 +63,14 @@ def delete_question(request, question_id):
 	question = get_object_or_404(Question, pk=question_id)
 	question.delete()
 	return redirect('question_list')
+
+def register(request):
+	if request.method == "POST":
+		form = SignUpForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('login')
+	else:
+		form = SignUpForm()
+
+	return render(request, 'register.html', {'form': form})
