@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Question, Task
 from .forms import QuestionForm, TaskForm
 from django.http import HttpResponseRedirect
@@ -58,3 +58,8 @@ def edit_question(request, question_id):
 		form = QuestionForm(instance=question)
 
 	return render(request, 'edit_question.html', {'form': form})
+
+def delete_question(request, question_id):
+	question = get_object_or_404(Question, pk=question_id)
+	question.delete()
+	return redirect('question_list')

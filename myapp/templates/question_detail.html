@@ -8,6 +8,7 @@
     <p>{{ question.body }}</p>
     <small>Posted on: {{ question.created_at }}</small>
     <br><br>
-    <a href="/questions/">← Back to all questions</a>
+    <a href="{% url 'delete_question' question.id %}" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a><br>
+    <a href="/questions/">← Back to all questions</a><br>
 </body>
 </html>
