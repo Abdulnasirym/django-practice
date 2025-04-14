@@ -6,7 +6,14 @@
         {{ q.body|truncatewords:20 }}<br>
         <small>Posted on: {{ q.created_at }}</small>
     </li>
-    <a href="{% url 'edit_question' q.id %}">Edit</a>
     <hr>
 {% endfor %}
-<a href="{% url 'add_question' %}">Add a New Question</a>
+{% if user.is_authenticated %}
+    <a href="{% url 'add_question' %}">Add Question</a>
+    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+{% else %}
+    <a href="{% url 'login' %}">Login</a>
+{% endif %}

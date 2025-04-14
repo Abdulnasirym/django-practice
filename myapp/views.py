@@ -3,6 +3,7 @@ from .models import Question, Task
 from .forms import QuestionForm, TaskForm, SignUpForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
@@ -24,6 +25,7 @@ def task_detail(request, id):
 	task = get_object_or_404(Task, id=id)
 	return render(request, 'task_detail.html', {'task': task})
 
+@login_required
 def add_question(request):
 	if request.method == 'POST':
 		form = QuestionForm(request.POST)
@@ -46,6 +48,7 @@ def add_task(request):
 
 	return render(request, 'add_task.html', {'form': form})
 
+@login_required
 def edit_question(request, question_id):
 	question = get_object_or_404(Question, pk=question_id)
 
@@ -59,6 +62,7 @@ def edit_question(request, question_id):
 
 	return render(request, 'edit_question.html', {'form': form})
 
+@login_required
 def delete_question(request, question_id):
 	question = get_object_or_404(Question, pk=question_id)
 	question.delete()
